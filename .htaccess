@@ -1,0 +1,8 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+RewriteRule /(.*)/ index.php?class=$1&function=$2
+RewriteRule /(.*)/(.*)/ index.php?class=$1&function=$2
+
+RewriteRule /(.*) index.php?class=$1&function=$2
+RewriteRule /(.*)/(.*) index.php?class=$1&function=$2
