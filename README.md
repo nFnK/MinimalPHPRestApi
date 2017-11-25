@@ -54,18 +54,18 @@
   # JWT
   > Converts array to JWT Token
   ```
-  JWT($payload)
+  Common::JWT($payload)
   ```
   
-  #check_jwt
+  # check_jwt
   > Checks for valid jwt token
   ```
   function __construct(){
-		$this->db = new DB();
-		Common::check_jwt();
-	}
+	$this->db = new DB();
+	Common::check_jwt();
+}
   ```
-  #filter
+  # filter
   > Filter data from sqli
   ```
 		Common::filter($_POST);
