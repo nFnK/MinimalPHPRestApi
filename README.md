@@ -1,6 +1,11 @@
 # MinimalPHPRestApi
   A minimal library for Rest Api using PHP and JWT.
-
+  
+```
+Start adding your class files inside 'api/' folder
+http://localhost/amazon/index.php/Class_name/Function_name
+Ex : http://localhost/amazon/index.php/hotel/get_single_hotel
+```
 # To use DB query
   
   > In constructor use this : $this->db = new DB();
