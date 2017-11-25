@@ -2,7 +2,7 @@
 class Common{
 	public static $jwt_key = '';
 	public static $jwt_expiry_time = 0;
-	
+
 	public static function json($data){
 		// header('Content-Type: application/text');
 		header('Content-Type: application/json');
@@ -41,6 +41,20 @@ class Common{
 	        "data" => $payload
     	);
 		return JWT::encode($token, Common::$jwt_key);
+	}
+	public static function check_jwt(){
+		$headers = getallheaders();
+		if($headers['X-Auth-Token'])
+		{
+		  	try{
+		  		$key = $headers['X-Auth-Token'];
+				$decoded = JWT::decode($key, Common::$jwt_key, array('HS256'));
+		  	}catch (Exception $e) {
+                Common::json(array('success'=> 0, 'message' => $e));
+            }
+		}else{
+			Common::json(array('success'=> 1 , 'message' => 'No auth token found'));
+		}
 	}
 	public static function isAjax()
 	{

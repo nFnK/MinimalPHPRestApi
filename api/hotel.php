@@ -3,18 +3,7 @@ Class hotel{
 	private $db;
 	function __construct(){
 		$this->db = new DB();
-		$headers = getallheaders();
-		if($headers['X-Auth-Token'])
-		{
-		  	try{
-		  		$key = $headers['X-Auth-Token'];
-				$decoded = JWT::decode($key, Common::$jwt_key, array('HS256'));
-		  	}catch (Exception $e) {
-                Common::json(array('success'=> 0, 'message' => $e));
-            }
-		}else{
-			Common::json(array('success'=> 1 , 'message' => 'auth token no'));
-		}
+		Common::check_jwt();
 	}
 
 	public function get_hotel(){

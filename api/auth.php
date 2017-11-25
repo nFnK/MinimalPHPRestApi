@@ -37,7 +37,7 @@ Class auth{
 	}
 	public function get_users()
 	{
-		if(isset($_POST['username']) && isset($_POST['password']))
+		// if(isset($_POST['username']) && isset($_POST['password']))
 		{
 			$payload = Common::filter($_POST);
 			$res = $this->db->select('users','*');
@@ -46,6 +46,22 @@ Class auth{
 			}else{
 				Common::json(array('success'=>0 , 'message' => 'Failed to get users' , 'catch' => 'Check the fields matching table fields'));
 			}
+		}
+	}
+	public function update_user(){
+		if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['user_id'])){
+			$payload = Common::filter($_POST);
+
+			$where = array('user_id'=>$payload['user_id']);
+			$res = $this->db->update($payload,'users',$where);
+
+			if($res){
+				Common::json(array('success'=>1 , 'message' => 'Registered successfully' , 'token' => Common::JWT($payload)));
+			}else{
+				Common::json(array('success'=>0 , 'message' => 'Failed to register.' , 'catch' => 'Check the fields matching table fields'));
+			}
+		}else{
+			Common::json(array('success'=>0 , 'message' => 'All fields required'));
 		}
 	}
 }
