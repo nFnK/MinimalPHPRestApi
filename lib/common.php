@@ -5,12 +5,14 @@ class Common{
 
 	public static function json($data){
 		// header('Content-Type: application/text');
+		header('Access-Control-Allow-Origin: *');
 		header('Content-Type: application/json');
 		echo json_encode($data);
 		die();
 	}
 	public static function xml($data)
 	{
+		header('Access-Control-Allow-Origin: *');
 		$xml = new SimpleXMLElement('<root/>');
 		array_walk_recursive($data, array ($xml, 'addChild'));
 		print $xml->asXML();
